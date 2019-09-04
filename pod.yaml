@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox1
+spec:
+  containers:
+  - name: c1
+    image: centos:7
+    command:
+      - "bin/bash"
+      - "-c"
+      - "sleep 10000"
+    volumeMounts:
+      - name: xchange
+        mountPath: /etc/xchange
+  volumes:
+  - name: xchange
+    configMap:
+      name: special-config
+      items:
+      - key: special.how
+        path: special.how
